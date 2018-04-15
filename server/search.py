@@ -13,5 +13,8 @@ def hello_world():
 
 if __name__ == '__main__':
     dao = TesterDAO()
-
+    countries = dao.get_countries()
+    print(countries)
+    devices = dao.get_devices()
+    print(devices)
 
