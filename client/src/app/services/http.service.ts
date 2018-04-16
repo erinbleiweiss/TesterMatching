@@ -24,8 +24,8 @@ export class HttpService {
       });
   }
 
-  search(): Observable<any[]>{
-    return this.http.get(`${HOSTNAME}/countries`)
+  search(countryParam: string, deviceParam: string): Observable<any[]>{
+    return this.http.get(`${HOSTNAME}/search?country=${countryParam}&device=${deviceParam}`)
       .map(res => {
         return res.json()
       });

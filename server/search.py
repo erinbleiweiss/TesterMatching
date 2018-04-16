@@ -31,5 +31,11 @@ def search():
     dao = TesterDAO()
     country_params = request.args.get('country').split('|')
     device_params = request.args.get('device').split('|')
+
+    if country_params == 'all':
+        country_params = None
+    if device_params == 'all':
+        device_params = None
+
     return jsonify(dao.search(country_filter=country_params,
                               device_filter=device_params))
