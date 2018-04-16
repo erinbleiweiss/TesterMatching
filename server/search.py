@@ -14,7 +14,8 @@ def hello_world():
 if __name__ == '__main__':
     dao = TesterDAO()
     countries = dao.get_countries()
-    print(countries)
     devices = dao.get_devices()
-    print(devices)
+
+    res = dao.search(country_filter=['US'], device_filter=['iPhone 4S', 'Nexus 4'])
+    print(res)
 
