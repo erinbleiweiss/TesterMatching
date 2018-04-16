@@ -9,13 +9,18 @@ CORS(app)
 from testerDAO import TesterDAO
 
 
-@app.route("/get_countries", methods=["GET"])
+@app.route("/", methods=["GET"])
+def index():
+    return "Tester Matching App"
+
+
+@app.route("/countries", methods=["GET"])
 def get_countries():
     dao = TesterDAO()
     return jsonify(dao.get_countries())
 
 
-@app.route("/get_devices", methods=["GET"])
+@app.route("/devices", methods=["GET"])
 def get_devices():
     dao = TesterDAO()
     return jsonify(dao.get_devices())
