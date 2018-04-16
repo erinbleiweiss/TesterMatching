@@ -29,6 +29,7 @@ def get_devices():
 @app.route("/search", methods=["GET"])
 def search():
     dao = TesterDAO()
-    country_params = request.args.get('country')
-    device_params = request.args.get('device')
-    return jsonify(dao.search(country_filter=[], device_filter=[]))
+    country_params = request.args.get('country').split('|')
+    device_params = request.args.get('device').split('|')
+    return jsonify(dao.search(country_filter=country_params,
+                              device_filter=device_params))
