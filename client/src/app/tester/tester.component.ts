@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from "../services/http.service";
 import { Observable } from 'rxjs';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'tm-tester',
@@ -9,10 +10,16 @@ import { Observable } from 'rxjs';
 })
 export class TesterComponent implements OnInit {
 
+  public searchForm;
   public countries;
   public devices;
 
-  constructor(private httpService: HttpService) {}
+  public selectedCountries = [];
+
+  constructor(
+    private httpService: HttpService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.httpService.getCountries().subscribe(data => {
@@ -21,6 +28,17 @@ export class TesterComponent implements OnInit {
     this.httpService.getDevices().subscribe(data => {
       this.devices = data
     });
+
+    this.searchForm = this.formBuilder.group({
+      countrySelect:[],
+      deviceSelect:[]
+    })
+
+  }
+
+  onSubmit(){
+    let selectedCountries = this.searchForm.controls['countrySelect'].value;
+    console.log(selectedCountries);
   }
 
 }

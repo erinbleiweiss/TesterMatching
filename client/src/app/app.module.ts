@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SuiSelectModule, SuiCheckboxModule } from 'ng2-semantic-ui';
 
 import { AppComponent } from './app.component';
 import { HttpService } from "./services/http.service";
@@ -15,6 +17,10 @@ import { routing } from "./app.routing";
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SuiSelectModule,
+    SuiCheckboxModule,
     routing
   ],
   providers: [

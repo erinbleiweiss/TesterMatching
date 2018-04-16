@@ -1,7 +1,33 @@
 <h1>Tester Matching</h1>
 
-{{countries}}
+<form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <sui-multi-select class="selection"
+                    formControlName="countrySelect"
+                    [options]="options"
+                    [isSearchable]="true"
+                    [isDisabled]="disabled"
+                    [hasLabels]="!hideLabels"
+                    #countriesMultiSelect>
+    <sui-select-option *ngFor="let option of countries"
+                       [value]="option">
+    </sui-select-option>
+  </sui-multi-select>
 
-<br>
+  <sui-multi-select class="selection"
+                    formControlName="deviceSelect"
+                    [options]="options"
+                    [isSearchable]="true"
+                    [isDisabled]="disabled"
+                    [hasLabels]="!hideLabels"
+                    #devicesMultiSelect>
+    <sui-select-option *ngFor="let option of devices"
+                       [value]="option">
+    </sui-select-option>
+  </sui-multi-select>
 
-{{devices}}
+
+  <button type="submit" class="ui primary button">
+    Search
+  </button>
+
+</form>
