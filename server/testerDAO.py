@@ -2,7 +2,7 @@ import csv
 import os
 
 from collections import OrderedDict
-from .testerModels import Bug, Device, TesterDevice, Tester
+from testerModels import Bug, Device, TesterDevice, Tester
 
 
 class TesterDAO:

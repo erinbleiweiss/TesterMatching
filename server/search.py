@@ -4,7 +4,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-from .testerDAO import TesterDAO
+from testerDAO import TesterDAO
 
 
 @app.route("/get_countries", methods=["GET"])
