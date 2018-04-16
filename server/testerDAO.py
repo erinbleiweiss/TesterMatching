@@ -47,7 +47,7 @@ class TesterDAO:
                 return device.description
         return "Unknown Device"
 
-    def search(self, country_filter=[], device_filter=[]):
+    def search(self, country_filter=None, device_filter=None):
         # If no countries or devices are provided, search all
         if not country_filter:
             country_filter = list(self.get_countries())
