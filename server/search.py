@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
+from pprint import pprint
 
 app = Flask(__name__)
 CORS(app)
@@ -16,6 +17,6 @@ if __name__ == '__main__':
     countries = dao.get_countries()
     devices = dao.get_devices()
 
-    res = dao.search(country_filter=['US'], device_filter=['iPhone 4S', 'Nexus 4'])
-    print(res)
+    res = dao.search(country_filter=[], device_filter=[])
+    pprint(res)
 

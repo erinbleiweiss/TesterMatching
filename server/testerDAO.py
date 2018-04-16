@@ -1,8 +1,10 @@
 import csv
+import operator
 import os
+
+from collections import OrderedDict
 from testerModels import Bug, Device, TesterDevice, Tester
 
-from pprint import pprint
 
 class TesterDAO:
 
@@ -47,6 +49,7 @@ class TesterDAO:
         return "Unknown Device"
 
     def search(self, country_filter=[], device_filter=[]):
+        # If no countries or devices are provided, search all
         if not country_filter:
             country_filter = list(self.get_countries())
         if not device_filter:
@@ -58,28 +61,46 @@ class TesterDAO:
         device_ids_matching_description = [d.deviceId for d in self.devices
                                            if d.description in device_filter]
 
+        # Get bugs filtered by country, device criteria
         matching_bugs = [b for b in self.bugs if
                          b.testerId in tester_ids_matching_country and
                          b.deviceId in device_ids_matching_description]
 
+        # Create dictionary of testers with bugs assigned to each tester
         bugs_sorted_by_tester = {}
         for bug in matching_bugs:
             bugs_sorted_by_tester.setdefault(bug.testerId, []).append(bug)
 
+        # Create nested dictionaries sorting each tester's bug by device type
         for (tester, bugs) in bugs_sorted_by_tester.items():
+            total_bugs_for_tester = len(bugs)
             bugs_sorted_by_device = {}
             for bug in bugs:
                 bugs_sorted_by_device.setdefault(bug.deviceId, []).append(bug)
             for (device, bugs) in bugs_sorted_by_device.items():
                 bugs_sorted_by_device[device] = len(bugs)
 
+            # Map device ID to device name
             bug_count_by_device_name = dict((self.get_device_name(key), value)
                                             for (key, value)
                                             in bugs_sorted_by_device.items())
 
-            bugs_sorted_by_tester[tester] = bug_count_by_device_name
+            # Add total bug count for each tester
+            bug_count_by_device_name['Total'] = total_bugs_for_tester
 
-        return bugs_sorted_by_tester
+            # Sort bug counts for each device in descending order
+            bugs_sorted_by_tester[tester] = OrderedDict(sorted(
+                    bug_count_by_device_name.items(),
+                    key=lambda i: i[1],
+                    reverse=True))
+
+        # Sort testers by total bug count in descending order
+        testers_sorted_by_bug_count = OrderedDict(sorted(
+                bugs_sorted_by_tester.items(),
+                key=lambda i: i[1]['Total'],
+                reverse=True))
+
+        return testers_sorted_by_bug_count
 
 
 
