@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pprint import pprint
 
@@ -8,15 +8,21 @@ CORS(app)
 from testerDAO import TesterDAO
 
 
-@app.route("/hello_world", methods=["GET"])
-def hello_world():
-    return "Hello World!"
-
-if __name__ == '__main__':
+@app.route("/get_countries", methods=["GET"])
+def get_countries():
     dao = TesterDAO()
-    countries = dao.get_countries()
-    devices = dao.get_devices()
+    return jsonify(dao.get_countries())
 
-    res = dao.search(country_filter=[], device_filter=[])
-    pprint(res)
 
+@app.route("/get_devices", methods=["GET"])
+def get_devices():
+    dao = TesterDAO()
+    return jsonify(dao.get_devices())
+
+
+@app.route("/search", methods=["GET"])
+def search():
+    dao = TesterDAO()
+    country_params = request.args.get('country')
+    device_params = request.args.get('device')
+    return jsonify(dao.search(country_filter=[], device_filter=[]))
