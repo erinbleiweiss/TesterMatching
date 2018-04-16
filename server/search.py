@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from collections import OrderedDict
 
 app = Flask(__name__)
+app.config["JSON_SORT_KEYS"] = False
 CORS(app)
 
 from testerDAO import TesterDAO
