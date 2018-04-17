@@ -39,9 +39,9 @@ export class TesterComponent implements OnInit {
 
   onSubmit(){
     let selectedCountries = this.searchForm.controls['countrySelect'].value;
-    let countryParam = selectedCountries ? selectedCountries.join('|') : "all";
+    let countryParam = selectedCountries && selectedCountries.length > 0 ? selectedCountries.join('|') : "all";
     let selectedDevices = this.searchForm.controls['deviceSelect'].value;
-    let deviceParam = selectedDevices ? selectedDevices.join('|') : "all";
+    let deviceParam = selectedDevices && selectedDevices.length > 0 ? selectedDevices.join('|') : "all";
 
     this.httpService.search(countryParam, deviceParam).subscribe(data => {
       this.searchResult = [];
