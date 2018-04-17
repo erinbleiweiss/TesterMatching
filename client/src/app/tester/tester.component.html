@@ -3,12 +3,12 @@
 
   <form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="ui fluid input">
-      <sui-multi-select class="selection"
-                        formControlName="countrySelect"
-                        [options]="options"
+      <sui-multi-select formControlName="countrySelect"
+                        class="selection"
+                        [options]="countries"
                         [isSearchable]="false"
                         #countriesMultiSelect>
-        <sui-select-option *ngFor="let option of countries" [value]="option">
+        <sui-select-option *ngFor="let country of countriesMultiSelect.filteredOptions" [value]="country">
         </sui-select-option>
       </sui-multi-select>
     </div>
@@ -18,8 +18,8 @@
                         class="selection"
                         [options]="devices"
                         [isSearchable]="false"
-                        #multiSelect>
-        <sui-select-option *ngFor="let device of multiSelect.filteredOptions" [value]="device">
+                        #devicesMultiSelect>
+        <sui-select-option *ngFor="let device of devicesMultiSelect.filteredOptions" [value]="device">
         </sui-select-option>
       </sui-multi-select>
     </div>
