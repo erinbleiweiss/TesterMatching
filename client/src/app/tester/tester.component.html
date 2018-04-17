@@ -2,7 +2,8 @@
   <h1>Tester Matching</h1>
 
   <form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-    <div class="ui fluid input">
+    <div class="ui fluid field">
+      <label>Countries</label>
       <sui-multi-select formControlName="countrySelect"
                         class="selection"
                         [options]="countries"
@@ -13,7 +14,8 @@
       </sui-multi-select>
     </div>
 
-    <div class="ui fluid input">
+    <div class="ui fluid field">
+      <label>Devices</label>
       <sui-multi-select formControlName="deviceSelect"
                         class="selection"
                         [options]="devices"
