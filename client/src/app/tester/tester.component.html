@@ -1,58 +1,64 @@
-<h1>Tester Matching</h1>
+<div class="ui twelve column container">
+  <h1>Tester Matching</h1>
 
-<form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-  <div class="ui fluid input">
-    <sui-multi-select class="selection"
-                      formControlName="countrySelect"
-                      [options]="options"
-                      [isSearchable]="false"
-                      #countriesMultiSelect>
-      <sui-select-option *ngFor="let option of countries"
-                         [value]="option">
-      </sui-select-option>
-    </sui-multi-select>
-  </div>
+  <form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="ui fluid input">
+      <sui-multi-select class="selection"
+                        formControlName="countrySelect"
+                        [options]="options"
+                        [isSearchable]="false"
+                        #countriesMultiSelect>
+        <sui-select-option *ngFor="let option of countries"
+                           [value]="option">
+        </sui-select-option>
+      </sui-multi-select>
+    </div>
 
-  <div class="ui fluid input">
-    <sui-multi-select class="selection"
-                      formControlName="deviceSelect"
-                      [options]="options"
-                      [isSearchable]="false"
-                      #devicesMultiSelect>
-      <sui-select-option *ngFor="let option of devices"
-                         [value]="option">
-      </sui-select-option>
-    </sui-multi-select>
-  </div>
+    <div class="ui fluid input">
+      <sui-multi-select class="selection"
+                        formControlName="deviceSelect"
+                        [options]="options"
+                        [isSearchable]="false"
+                        #devicesMultiSelect>
+        <sui-select-option *ngFor="let option of devices"
+                           [value]="option">
+        </sui-select-option>
+      </sui-multi-select>
+    </div>
 
 
-  <button type="submit" class="ui primary button">
-    Search
-  </button>
+    <button type="submit" class="ui primary button">
+      Search
+    </button>
 
-</form>
+  </form>
 
-<table class="ui single line striped structured fluid table" *ngIf="searchResult.length > 0">
-  <thead>
-    <th>Tester</th>
-    <th>Total Bugs</th>
-    <th colspan="2">Bugs By Device</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let tester of searchResult">
-      <td>{{tester.testerId}}</td>
-      <td>{{tester.totalBugs}}</td>
-      <td>
-        <ng-container *ngFor="let device of tester.deviceReports">
-          {{device.device}}<br>
-        </ng-container>
-      </td>
-      <td>
-        <ng-container *ngFor="let device of tester.deviceReports">
-          {{device.bugCount}}<br>
-        </ng-container>
-      </td>
-    </tr>
-  </tbody>
+  <table class="ui single line striped collapsing six column table" *ngIf="searchResult.length > 0">
+    <thead>
+      <th class="center aligned">Tester</th>
+      <th class="center aligned">Total Bugs</th>
+      <th colspan="2">Bugs By Device</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tester of searchResult">
+        <td class="center aligned">{{tester.testerId}}</td>
+        <td class="center aligned">{{tester.totalBugs}}</td>
+        <td>
+          <ng-container *ngFor="let device of tester.deviceReports">
+            {{device.device}}<br>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngFor="let device of tester.deviceReports">
+            {{device.bugCount}}<br>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
 
-</table>
+  </table>
+</div>
+
+<br>
+<br>
+<br>
