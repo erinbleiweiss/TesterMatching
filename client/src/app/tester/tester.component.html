@@ -8,20 +8,18 @@
                         [options]="options"
                         [isSearchable]="false"
                         #countriesMultiSelect>
-        <sui-select-option *ngFor="let option of countries"
-                           [value]="option">
+        <sui-select-option *ngFor="let option of countries" [value]="option">
         </sui-select-option>
       </sui-multi-select>
     </div>
 
     <div class="ui fluid input">
-      <sui-multi-select class="selection"
-                        formControlName="deviceSelect"
-                        [options]="options"
+      <sui-multi-select formControlName="deviceSelect"
+                        class="selection"
+                        [options]="devices"
                         [isSearchable]="false"
-                        #devicesMultiSelect>
-        <sui-select-option *ngFor="let option of devices"
-                           [value]="option">
+                        #multiSelect>
+        <sui-select-option *ngFor="let device of multiSelect.filteredOptions" [value]="device">
         </sui-select-option>
       </sui-multi-select>
     </div>
@@ -33,16 +31,16 @@
 
   </form>
 
-  <table class="ui single line striped collapsing six column table" *ngIf="searchResult.length > 0">
+  <table class="ui single line striped collapsing table" *ngIf="searchResult.length > 0">
     <thead>
       <th class="center aligned">Tester</th>
       <th class="center aligned">Total Bugs</th>
-      <th colspan="2">Bugs By Device</th>
+      <th colspan="2" class="center aligned">Bugs By Device</th>
     </thead>
     <tbody>
       <tr *ngFor="let tester of searchResult">
-        <td class="center aligned">{{tester.testerId}}</td>
-        <td class="center aligned">{{tester.totalBugs}}</td>
+        <td class="right aligned">{{tester.testerId}}</td>
+        <td class="right aligned">{{tester.totalBugs}}</td>
         <td>
           <ng-container *ngFor="let device of tester.deviceReports">
             {{device.device}}<br>

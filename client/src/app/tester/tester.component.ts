@@ -13,7 +13,7 @@ export class TesterComponent implements OnInit {
 
   public searchForm;
   public countries;
-  public devices;
+  public devices = [];
 
   public searchResult: Tester[] = [];
 
@@ -24,10 +24,11 @@ export class TesterComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.getCountries().subscribe(data => {
-      this.countries = data
+      this.countries = data;
+      console.log(this.countries);
     });
     this.httpService.getDevices().subscribe(data => {
-      this.devices = data
+      this.devices = data;
     });
 
     this.searchForm = this.formBuilder.group({
