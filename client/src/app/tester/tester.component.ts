@@ -44,6 +44,7 @@ export class TesterComponent implements OnInit {
     let deviceParam = selectedDevices ? selectedDevices.join('|') : "all";
 
     this.httpService.search(countryParam, deviceParam).subscribe(data => {
+      this.searchResult = [];
 
       for (let testerId in data) {
         this.searchResult.push(new Tester(testerId, data[testerId]));
