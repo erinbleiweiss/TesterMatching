@@ -48,3 +48,4 @@ vcs.xml
 workspace.xml
 *.pyc
 *.pem
+.editorconfig
