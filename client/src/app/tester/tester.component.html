@@ -32,9 +32,27 @@
 
 </form>
 
+<table class="ui single line striped structured fluid table" *ngIf="searchResult.length > 0">
+  <thead>
+    <th>Tester</th>
+    <th>Total Bugs</th>
+    <th colspan="2">Bugs By Device</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tester of searchResult">
+      <td>{{tester.testerId}}</td>
+      <td>{{tester.totalBugs}}</td>
+      <td>
+        <ng-container *ngFor="let device of tester.deviceReports">
+          {{device.device}}<br>
+        </ng-container>
+      </td>
+      <td>
+        <ng-container *ngFor="let device of tester.deviceReports">
+          {{device.bugCount}}<br>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
 
-<span *ngFor="let tester of searchResult">
-  User {{tester.testerId}} - Total Bugs: {{tester.totalBugs}}
-  <br>
-</span>
-
+</table>
