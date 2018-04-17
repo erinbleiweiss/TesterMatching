@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from "../services/http.service";
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
+import { Tester } from "../models/tester";
 
 @Component({
   selector: 'tm-tester',
@@ -14,7 +15,7 @@ export class TesterComponent implements OnInit {
   public countries;
   public devices;
 
-  public selectedCountries = [];
+  public searchResult: Tester[] = [];
 
   constructor(
     private httpService: HttpService,
@@ -43,7 +44,17 @@ export class TesterComponent implements OnInit {
     let deviceParam = selectedDevices ? selectedDevices.join('|') : "all";
 
     this.httpService.search(countryParam, deviceParam).subscribe(data => {
-      console.log(data);
+
+      for (let testerId in data) {
+        this.searchResult.push(new Tester(testerId, data[testerId]));
+      }
+
+      this.searchResult.sort(function(t1, t2){
+        return t2.totalBugs - t1.totalBugs;
+      });
+
+      console.log(this.searchResult);
+
     })
 
   }

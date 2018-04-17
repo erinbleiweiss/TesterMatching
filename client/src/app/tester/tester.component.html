@@ -1,29 +1,29 @@
 <h1>Tester Matching</h1>
 
 <form class="ui form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-  <sui-multi-select class="selection"
-                    formControlName="countrySelect"
-                    [options]="options"
-                    [isSearchable]="true"
-                    [isDisabled]="disabled"
-                    [hasLabels]="!hideLabels"
-                    #countriesMultiSelect>
-    <sui-select-option *ngFor="let option of countries"
-                       [value]="option">
-    </sui-select-option>
-  </sui-multi-select>
+  <div class="ui fluid input">
+    <sui-multi-select class="selection"
+                      formControlName="countrySelect"
+                      [options]="options"
+                      [isSearchable]="false"
+                      #countriesMultiSelect>
+      <sui-select-option *ngFor="let option of countries"
+                         [value]="option">
+      </sui-select-option>
+    </sui-multi-select>
+  </div>
 
-  <sui-multi-select class="selection"
-                    formControlName="deviceSelect"
-                    [options]="options"
-                    [isSearchable]="true"
-                    [isDisabled]="disabled"
-                    [hasLabels]="!hideLabels"
-                    #devicesMultiSelect>
-    <sui-select-option *ngFor="let option of devices"
-                       [value]="option">
-    </sui-select-option>
-  </sui-multi-select>
+  <div class="ui fluid input">
+    <sui-multi-select class="selection"
+                      formControlName="deviceSelect"
+                      [options]="options"
+                      [isSearchable]="false"
+                      #devicesMultiSelect>
+      <sui-select-option *ngFor="let option of devices"
+                         [value]="option">
+      </sui-select-option>
+    </sui-multi-select>
+  </div>
 
 
   <button type="submit" class="ui primary button">
@@ -31,3 +31,10 @@
   </button>
 
 </form>
+
+
+<span *ngFor="let tester of searchResult">
+  User {{tester.testerId}} - Total Bugs: {{tester.totalBugs}}
+  <br>
+</span>
+

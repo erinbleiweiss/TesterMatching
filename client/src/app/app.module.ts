@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { HttpService } from "./services/http.service";
 import { TesterComponent } from './tester/tester.component';
 import { routing } from "./app.routing";
+import { KeyValuePipe } from './pipes/key-value.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TesterComponent
+    TesterComponent,
+    KeyValuePipe
   ],
   imports: [
     BrowserModule,
