@@ -25,7 +25,6 @@ export class TesterComponent implements OnInit {
   ngOnInit() {
     this.httpService.getCountries().subscribe(data => {
       this.countries = data;
-      console.log(this.countries);
     });
     this.httpService.getDevices().subscribe(data => {
       this.devices = data;
@@ -54,8 +53,6 @@ export class TesterComponent implements OnInit {
       this.searchResult.sort(function(t1, t2){
         return t2.totalBugs - t1.totalBugs;
       });
-
-      console.log(this.searchResult);
 
     })
 
